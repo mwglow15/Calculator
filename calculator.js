@@ -27,6 +27,9 @@ function operation() {
             break;
         case '=':
             evalOnNext = false;
+            break;
+        default:
+            lastNum = currentNum;
     }
 
     currentNum = null;
