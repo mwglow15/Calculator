@@ -45,9 +45,9 @@ function operation() {
 function setCurrent() {
     if (currentNum ) {
         currentNum = currentNum + this.textContent;
-    } else if (this.textContent === '.') {
+    } else if (!currentNum && this.textContent === '.') {
         currentNum = '0.';
-    } {
+    } else {
         currentNum = this.textContent;
     }
 
