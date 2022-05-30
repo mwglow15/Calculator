@@ -7,7 +7,6 @@ let evalOnNext = false;
 let nextOperation = null;
 
 function operation() {
-    nextOperation = this.textContent;
 
     switch(nextOperation) {
         case '+':
@@ -30,7 +29,7 @@ function operation() {
             evalOnNext = false;
     }
 
-
+    currentNum = null;
     nextOperation = this.textContent;
     console.log(lastNum);
     console.log(currentNum);
@@ -40,7 +39,6 @@ function setCurrent() {
         lastNum = currentNum;
     }
     currentNum = this.textContent;
-    console.log(currentNum);
 };
 
 operationBtn.forEach(item => item.addEventListener('click', operation));
@@ -48,21 +46,29 @@ del.addEventListener('click', () => currentNum = 0);
 numBtn.forEach(item => item.addEventListener('click', setCurrent));
 
 function add(a,b) {
+    a = ~~a;
+    b = ~~b;
     const sum = a + b;
     return sum;
 }
 
 function diff(a,b) {
+    a = ~~a;
+    b = ~~b;
     const diff = a - b;
     return diff;
 }
 
 function mult(a,b) {
+    a = ~~a;
+    b = ~~b;
     const prod = a * b;
     return prod;
 }
 
 function div(a,b) {
+    a = ~~a;
+    b = ~~b;
     const quot = a / b;
     return quot;
 }
