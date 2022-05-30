@@ -55,29 +55,29 @@ function setCurrent() {
 };
 
 function add(a,b) {
-    a = ~~a;
-    b = ~~b;
+    a =Number(a);
+    b =Number(b);
     const sum = a + b;
     return sum;
 };
 
 function diff(a,b) {
-    a = ~~a;
-    b = ~~b;
+    a =Number(a);
+    b =Number(b);
     const diff = a - b;
     return diff;
 };
 
 function mult(a,b) {
-    a = ~~a;
-    b = ~~b;
+    a =Number(a);
+    b =Number(b);
     const prod = a * b;
     return prod;
 };
 
 function div(a,b) {
-    a = ~~a;
-    b = ~~b;
+    a =Number(a);
+    b =Number(b);
     const quot = a / b;
     return quot;
 };
