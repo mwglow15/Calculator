@@ -1,6 +1,6 @@
 const numBtn = document.querySelectorAll(".num");
 const operationBtn = document.querySelectorAll(".operation");
-const del = document.querySelector('.back');
+const del = document.querySelector('.del');
 const btn = document.querySelectorAll('.btn');
 const screen = document.querySelector('.screen');
 
@@ -24,8 +24,14 @@ function operation() {
                 evalOnNext = true;
                 break;
             case '/':
+                if(currentNum === 0) {
+                    lastNum = null;
+                    currentNum = null;
+                    screen.textContent = 'No No No!';
+                } else {
                 lastNum = div(lastNum, currentNum);
                 evalOnNext = true;
+                };
                 break;
             case '=':
                 evalOnNext = false;
@@ -42,16 +48,17 @@ function operation() {
     console.log(currentNum);
 };
 
-function setCurrent() {
-    if (currentNum ) {
-        currentNum = currentNum + this.textContent;
-    } else if (!currentNum && this.textContent === '.') {
-        currentNum = '0.';
-    } else {
-        currentNum = this.textContent;
+function setCurrent() { 
+    if((currentNum && currentNum.length <= 11) || !currentNum) {
+        if (currentNum && currentNum.length <= 11) {
+            currentNum = currentNum + this.textContent;
+        } else if (!currentNum && this.textContent === '.') {
+            currentNum = '0.';
+        } else {
+            currentNum = this.textContent;
+        }
     }
-
-    screen.textContent = currentNum;
+        screen.textContent = currentNum;
 };
 
 function add(a,b) {
@@ -76,17 +83,22 @@ function mult(a,b) {
 };
 
 function div(a,b) {
-    a =Number(a);
-    b =Number(b);
+
+    a = Number(a);
+    b = Number(b);
     const quot = a / b;
     return quot;
 };
 
+function clearScreen() {
+    currentNum = null;
+    screen.textContent = currentNum;
+}
 function updateScreen() {
         screen.textContent = currentNum;
 };
 
 operationBtn.forEach(item => item.addEventListener('click', operation));
-del.addEventListener('click', () => currentNum = 0);
+del.addEventListener('click', clearScreen);
 numBtn.forEach(item => item.addEventListener('click', setCurrent));
-numBtn.forEach(item => item.addEventListener('click', () => screen.textContent = currentNum));
+//numBtn.forEach(item => item.addEventListener('click', () => screen.textContent = currentNum));
