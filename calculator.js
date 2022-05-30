@@ -10,42 +10,46 @@ let evalOnNext = false;
 let nextOperation = null;
 
 function operation() {
-    switch(nextOperation) {
-        case '+':
-            lastNum = add(lastNum, currentNum);
-            evalOnNext = true;
-            break;
-        case '-':
-            lastNum = diff(lastNum, currentNum);
-            evalOnNext = true;
-            break;
-        case '*':
-            lastNum = mult(lastNum, currentNum);
-            evalOnNext = true;
-            break;
-        case '/':
-            lastNum = div(lastNum, currentNum);
-            evalOnNext = true;
-            break;
-        case '=':
-            evalOnNext = false;
-            break;
-        default:
-            lastNum = currentNum;
-    }
+        switch(nextOperation) {
+            case '+':
+                lastNum = add(lastNum, currentNum);
+                evalOnNext = true;
+                break;
+            case '-':
+                lastNum = diff(lastNum, currentNum);
+                evalOnNext = true;
+                break;
+            case 'X':
+                lastNum = mult(lastNum, currentNum);
+                evalOnNext = true;
+                break;
+            case '/':
+                lastNum = div(lastNum, currentNum);
+                evalOnNext = true;
+                break;
+            case '=':
+                evalOnNext = false;
+                lastNum = currentNum;
+                break;
+            default:
+                lastNum = currentNum;
+        };
 
     screen.textContent = lastNum
     currentNum = null;
     nextOperation = this.textContent;
     console.log(lastNum);
     console.log(currentNum);
-}
+};
 
 function setCurrent() {
     if (currentNum) {
-        lastNum = currentNum;
+        currentNum = currentNum + this.textContent;
+    } else {
+        currentNum = this.textContent;
     }
-    currentNum = this.textContent;
+
+    screen.textContent = currentNum;
 };
 
 function add(a,b) {
@@ -53,28 +57,28 @@ function add(a,b) {
     b = ~~b;
     const sum = a + b;
     return sum;
-}
+};
 
 function diff(a,b) {
     a = ~~a;
     b = ~~b;
     const diff = a - b;
     return diff;
-}
+};
 
 function mult(a,b) {
     a = ~~a;
     b = ~~b;
     const prod = a * b;
     return prod;
-}
+};
 
 function div(a,b) {
     a = ~~a;
     b = ~~b;
     const quot = a / b;
     return quot;
-}
+};
 
 function updateScreen() {
         screen.textContent = currentNum;
