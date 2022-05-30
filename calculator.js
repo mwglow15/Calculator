@@ -1,13 +1,15 @@
 const numBtn = document.querySelectorAll(".num");
 const operationBtn = document.querySelectorAll(".operation");
 const del = document.querySelector('.back');
+const btn = document.querySelectorAll('.btn');
+const screen = document.querySelector('.screen');
+
 let currentNum = null;
 let lastNum = null;
 let evalOnNext = false;
 let nextOperation = null;
 
 function operation() {
-
     switch(nextOperation) {
         case '+':
             lastNum = add(lastNum, currentNum);
@@ -32,21 +34,19 @@ function operation() {
             lastNum = currentNum;
     }
 
+    screen.textContent = lastNum
     currentNum = null;
     nextOperation = this.textContent;
     console.log(lastNum);
     console.log(currentNum);
 }
+
 function setCurrent() {
     if (currentNum) {
         lastNum = currentNum;
     }
     currentNum = this.textContent;
 };
-
-operationBtn.forEach(item => item.addEventListener('click', operation));
-del.addEventListener('click', () => currentNum = 0);
-numBtn.forEach(item => item.addEventListener('click', setCurrent));
 
 function add(a,b) {
     a = ~~a;
@@ -75,3 +75,12 @@ function div(a,b) {
     const quot = a / b;
     return quot;
 }
+
+function updateScreen() {
+        screen.textContent = currentNum;
+};
+
+operationBtn.forEach(item => item.addEventListener('click', operation));
+del.addEventListener('click', () => currentNum = 0);
+numBtn.forEach(item => item.addEventListener('click', setCurrent));
+numBtn.forEach(item => item.addEventListener('click', () => screen.textContent = currentNum));
