@@ -53,3 +53,9 @@ div {border-style: solid;
     text-align: center;
     border-radius: 7px;
 }
+
+.screen {
+    font-size: 60px;
+    text-align: right;
+    vertical-align: center;
+}
