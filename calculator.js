@@ -1,19 +1,22 @@
 const numBtn = document.querySelectorAll(".num");
+const addition = document.querySelector(".add")
 const del = document.querySelector('.back');
 let currentNum = null;
-let eval = false;
+let lastNum = null;
+let evalOnNext = false;
+let nextOperation = null;
 
 function setCurrent() {
     if (currentNum) {
-        
+        lastNum = currentNum;
     }
     currentNum = this.textContent;
     console.log(currentNum);
 };
 
+addition.addEventListener('click', () => operation);
 del.addEventListener('click', () => currentNum = 0);
 numBtn.forEach(item => item.addEventListener('click', setCurrent));
-console.log(numBtn);
 
 function add(a,b) {
     const sum = a + b;
