@@ -1,6 +1,7 @@
 const numBtn = document.querySelectorAll(".num");
 const operationBtn = document.querySelectorAll(".operation");
 const del = document.querySelector('.del');
+const clear = document.querySelector('.clear');
 const btn = document.querySelectorAll('.btn');
 const screen = document.querySelector('.screen');
 
@@ -10,42 +11,51 @@ let evalOnNext = false;
 let nextOperation = null;
 
 function operation() {
-        switch(nextOperation) {
-            case '+':
-                lastNum = add(lastNum, currentNum);
-                evalOnNext = true;
-                break;
-            case '-':
-                lastNum = diff(lastNum, currentNum);
-                evalOnNext = true;
-                break;
-            case 'X':
-                lastNum = mult(lastNum, currentNum);
-                evalOnNext = true;
-                break;
-            case '/':
-                if(currentNum === 0) {
-                    lastNum = null;
-                    currentNum = null;
-                    screen.textContent = 'No No No!';
-                } else {
-                lastNum = div(lastNum, currentNum);
-                evalOnNext = true;
-                };
-                break;
-            case '=':
-                evalOnNext = false;
-                lastNum = currentNum;
-                break;
-            default:
-                lastNum = currentNum;
-        };
+    switch(nextOperation) {
+        case '+':
+            lastNum = add(lastNum, currentNum);
+            evalOnNext = true;
+            break;
+        case '-':
+            lastNum = diff(lastNum, currentNum);
+            evalOnNext = true;
+            break;
+        case 'X':
+            lastNum = mult(lastNum, currentNum);
+            evalOnNext = true;
+            break;
+        case '/':
+            if(currentNum === 0) {
+                lastNum = null;
+                currentNum = null;
+                screen.textContent = 'No No No!';
+            } else {
+            lastNum = div(lastNum, currentNum);
+            evalOnNext = true;
+            };
+            break;
+        case '=':
+            evalOnNext = false;
+            lastNum = currentNum;
+            break;
+        default:
+            lastNum = currentNum;
+    };
 
+    if(lastNum.length > 11) {
+        lastNum = roundNum(lastNum);
+    }
     screen.textContent = lastNum
     currentNum = null;
     nextOperation = this.textContent;
+
     console.log(lastNum);
     console.log(currentNum);
+};
+
+function roundedNum(numString) {
+    const char = numString.slice(-1);
+    console.log(char);
 };
 
 function setCurrent() { 
@@ -62,43 +72,51 @@ function setCurrent() {
 };
 
 function add(a,b) {
-    a =Number(a);
-    b =Number(b);
+    a = Number(a);
+    b = Number(b);
     const sum = a + b;
     return sum;
 };
 
 function diff(a,b) {
-    a =Number(a);
-    b =Number(b);
+    a = Number(a);
+    b = Number(b);
     const diff = a - b;
     return diff;
 };
 
 function mult(a,b) {
-    a =Number(a);
-    b =Number(b);
+    a = Number(a);
+    b = Number(b);
     const prod = a * b;
     return prod;
 };
 
 function div(a,b) {
 
-    a = Number(a);
-    b = Number(b);
+    a =  Number(a);
+    b =  Number(b);
     const quot = a / b;
     return quot;
 };
 
 function clearScreen() {
     currentNum = null;
-    screen.textContent = currentNum;
+    lastNum = null;
+    nextOperation = null;
+    updateScreen();
 }
 function updateScreen() {
         screen.textContent = currentNum;
 };
 
+function backspace () {
+    currentNum = currentNum.slice(0,-1);
+    updateScreen();
+}
+
 operationBtn.forEach(item => item.addEventListener('click', operation));
-del.addEventListener('click', clearScreen);
+clear.addEventListener('click', clearScreen);
+del.addEventListener('click',backspace);
 numBtn.forEach(item => item.addEventListener('click', setCurrent));
 //numBtn.forEach(item => item.addEventListener('click', () => screen.textContent = currentNum));
