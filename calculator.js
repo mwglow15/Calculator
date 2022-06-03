@@ -73,11 +73,12 @@ function roundNum(numString) {
 
 function setCurrent() { 
     if((currentNum && currentNum.length <= 11) || !currentNum) {
-        if (currentNum && currentNum.length <= 11) {
+        if (currentNum && currentNum.length <= 11 || writeDecimal(currentNum, this.textContent)) {
             currentNum = currentNum + this.textContent;
         } else if (!currentNum && this.textContent === '.') {
             currentNum = '0.';
-        } else {
+        }
+            {
             currentNum = this.textContent;
         }
     }
