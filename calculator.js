@@ -42,6 +42,8 @@ function operation() {
             lastNum = currentNum;
     };
 
+    lastNum = String(lastNum);
+    console.log(typeof(lastNum))
     if(lastNum.length > 11) {
         lastNum = roundNum(lastNum);
     }
@@ -53,9 +55,19 @@ function operation() {
     console.log(currentNum);
 };
 
-function roundedNum(numString) {
-    const char = numString.slice(-1);
-    console.log(char);
+function roundNum(numString) {
+    console.log(lastNum);
+    const lastDigit = numString.charAt(11);
+    let secondLastDigit = numString.charAt(10);
+    console.log(lastDigit);
+    console.log(secondLastDigit);
+    if(Number(lastDigit >= 5)) {
+        secondLastDigit = Number(secondLastDigit);
+        secondLastDigit = secondLastDigit + 1;
+    };
+    const subStr = numString.slice(0,10);
+    const newNum = subStr + String(secondLastDigit);
+    return newNum;
 };
 
 function setCurrent() { 
