@@ -25,10 +25,11 @@ function operation() {
             evalOnNext = true;
             break;
         case '/':
-            if(currentNum === 0) {
+            console.log(currentNum);
+            if(currentNum === '0') {
                 lastNum = null;
                 currentNum = null;
-                screen.textContent = 'No No No!';
+                lastNum = 'No No No!';
             } else {
             lastNum = div(lastNum, currentNum);
             evalOnNext = true;
