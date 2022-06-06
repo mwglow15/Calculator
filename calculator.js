@@ -73,17 +73,27 @@ function roundNum(numString) {
 
 function setCurrent() { 
     if((currentNum && currentNum.length <= 11) || !currentNum) {
-        if (currentNum && currentNum.length <= 11 || writeDecimal(currentNum, this.textContent)) {
-            currentNum = currentNum + this.textContent;
-        } else if (!currentNum && this.textContent === '.') {
+        if (!currentNum && this.textContent === '.') {
             currentNum = '0.';
-        }
-            {
+        } else if (writeDecimal(currentNum, this.textContent)) {
+            currentNum = currentNum + this.textContent;
+        } else if (!(this.textContent === '.')){
             currentNum = this.textContent;
         }
     }
         screen.textContent = currentNum;
 };
+
+function writeDecimal(num, currentChar) {
+    console.log(num, currentChar);
+    if (num && currentChar === '.' && num.includes('.')) {
+        return false;
+    } else if (!num) {
+        return false;
+    } else {
+        return true;
+    }
+    };
 
 function add(a,b) {
     a = Number(a);
