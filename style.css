@@ -1,8 +1,9 @@
 :root {
     --background: #0061BC;
-    --back: #FFFF00;
+    --del: #FFFF00;
     --clear: #FF0000;
     --button: #C9C9C9;
+    --operation: #C78F00;
     --operation-border: #E25800;
 }
 
@@ -16,7 +17,8 @@
 html {
     min-height: 100%;
 }
-div {border-style: solid;
+div {
+    border-style: solid;
     border-width: 2px;
 }
 
@@ -27,12 +29,14 @@ div {border-style: solid;
     flex-direction: column;
     flex-basis: auto;
     padding: 10px;
+    background: var(--background)
 }
 
 .screen {
     height: 125px;
     margin-bottom: 10px;
     padding: 10px;
+    background: white;
 }
 
 
@@ -59,4 +63,20 @@ div {border-style: solid;
     font-size: 60px;
     text-align: right;
     vertical-align: center;
+}
+
+.clear {
+    background: var(--clear);
+}
+
+.del {
+    background: var(--del);
+}
+
+.num {
+    background: var(--button);
+}
+
+.operation {
+    background: var(--operation)
 }
