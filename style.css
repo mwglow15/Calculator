@@ -80,7 +80,7 @@ div {
     background: var(--del);
 }
 
-.num {
+.num, .dec{
     background: var(--button);
 }
 

@@ -4,6 +4,7 @@ const del = document.querySelector('.del');
 const clear = document.querySelector('.clear');
 const btn = document.querySelectorAll('.btn');
 const screen = document.querySelector('.screen');
+const dec = document.querySelector('.dec');
 
 let currentNum = null;
 let lastNum = null;
@@ -11,13 +12,12 @@ let evalOnNext = false;
 let nextOperation = null;
 
 function performOperation() {
-    console.log(currentNum)
     if (currentNum) {
-        operation();
+        operation(this.textContent);
     }
 }
 
-function operation() {
+function operation(operationClick) {
     switch(nextOperation) {
         case '+':
             lastNum = add(lastNum, currentNum);
@@ -56,7 +56,7 @@ function operation() {
     }
     screen.textContent = lastNum
     currentNum = null;
-    nextOperation = this.textContent;
+    nextOperation = operationClick;
 };
 
 function roundNum(numString) {
@@ -73,30 +73,20 @@ function roundNum(numString) {
 };
 
 function setCurrent() { 
-    console.log(currentNum);
-    if((currentNum && currentNum.length <= 11) || !currentNum) {
-        if (!currentNum && this.textContent === '.') {
-            currentNum = '0.';
-        } else if (writeDecimal(currentNum, this.textContent)) {
-            currentNum = currentNum + this.textContent;
-        } else if (!(this.textContent === '.')){
-            currentNum = this.textContent;
-        }
+    if(currentNum && currentNum.length <= 11){
+        currentNum = currentNum + this.textContent;
+    } else if (!currentNum) {
+        currentNum = this.textContent;
     }
+    
         screen.textContent = currentNum;
 };
 
-function writeDecimal(num, currentChar) {
-    console.log(num, currentChar);
-    if (num && currentChar === '.' && num.includes('.')) {
-        console.log('false1')
-        return false;
-    } else if (!num) {
-        console.log('false2')
-        return false;
-    } else {
-        console.log('true')
-        return true;
+function writeDecimal() {
+    if(!currentNum) {
+        currentNum = '0.';
+    } else if(!currentNum.includes('.')) {
+        currentNum = currentNum + this.textContent;
     }
     };
 
@@ -144,6 +134,7 @@ function backspace () {
     updateScreen();
 }
 
+dec.addEventListener('click', writeDecimal);
 operationBtn.forEach(item => item.addEventListener('click', performOperation));
 clear.addEventListener('click', clearScreen);
 del.addEventListener('click',backspace);
