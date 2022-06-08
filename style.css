@@ -18,7 +18,12 @@
 
 html {
     min-height: 100%;
+}
 
+body {
+    text-align: center;
+    font-size: large;
+    padding: 15px;
 }
 
 div {
